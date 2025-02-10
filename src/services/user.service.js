@@ -53,10 +53,28 @@ class userService {
           },
         };
         return data;
+      } else {
+        throw new Error("password incorrect");
       }
     } else {
       throw new Error("user not found");
     }
+  }
+
+  async authProfile(TOKEN) {
+    const token = this.jwtService.verifyToken(TOKEN);
+    const id = token.user_id;
+    const user = await this.userModel.findOne({ _id: id });
+    const data = {
+      success: true,
+      user: {
+        username: user.username,
+        email: user.email,
+        age: user.age,
+        role: user.role,
+      },
+    };
+    return data;
   }
 }
 export default userService;

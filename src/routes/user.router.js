@@ -12,4 +12,8 @@ userRouter.post("/auth/login", (req, res) => {
   controller.loginController(req, res);
 });
 
+userRouter.get("/auth/profile", (req, res) => {
+  controller.authProfileController(req, res);
+});
+
 export default userRouter;

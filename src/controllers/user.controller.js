@@ -30,6 +30,19 @@ class userController {
       });
     }
   }
+
+  async authProfileController(req, res) {
+    try {
+      const TOKEN = req.headers.authorization.split(" ")[1];
+      const user = await this.userService.authProfile(TOKEN);
+      res.json(user);
+    } catch (error) {
+      res.status(403).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
 }
 
 export default userController;

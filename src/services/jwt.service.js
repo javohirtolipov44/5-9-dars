@@ -7,12 +7,12 @@ class jwtService {
   }
   generateToken(userId) {
     const token = this.jwt.sign({ user_id: userId }, this.secretKey, {
-      expiresIn: "2m",
+      expiresIn: "24h",
     });
     return token;
   }
   verifyToken(token) {
-    this.jwt.verify(token, this.secretKey);
+    return this.jwt.verify(token, this.secretKey);
   }
 }
 
