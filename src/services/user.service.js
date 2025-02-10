@@ -76,5 +76,118 @@ class userService {
     };
     return data;
   }
+
+  async putAuthProfile(TOKEN, body) {
+    const token = this.jwtService.verifyToken(TOKEN);
+    const id = token.user_id;
+    const updateUser = await this.userModel.updateOne(
+      { _id: id },
+      { username: body.username, age: body.age }
+    );
+    const user = await this.userModel.findOne({ _id: id });
+    if (updateUser.modifiedCount === 1) {
+      const data = {
+        success: true,
+        user: {
+          username: user.username,
+          email: user.email,
+          age: user.age,
+        },
+      };
+      return data;
+    } else {
+      const data = {
+        success: false,
+        message: updateUser,
+      };
+      return data;
+    }
+  }
+
+  async changePassword(TOKEN, body) {
+    const token = this.jwtService.verifyToken(TOKEN);
+    const id = token.user_id;
+    const findUser = await this.userModel.findOne({ _id: id });
+    if (findUser) {
+      const comparePassword = await bcrypt.compare(
+        body.oldPassword,
+        findUser.password
+      );
+      if (comparePassword) {
+        const hashedPassword = await bcrypt.hash(body.newPassword, 12);
+        const updateUser = await this.userModel.updateOne(
+          { _id: id },
+          { password: hashedPassword }
+        );
+        if (updateUser.modifiedCount === 1) {
+          const data = {
+            success: true,
+            message: "Parol muvaffaqiyatli o'zgartirildi",
+          };
+          return data;
+        } else {
+          const data = {
+            success: false,
+            message: updateUser,
+          };
+          return data;
+        }
+      } else {
+        throw new Error("Parol mos kelmadi");
+      }
+    } else {
+      throw new Error("user not found");
+    }
+  }
+
+  async checkEmail(params) {
+    await this.joiService.validateEmail(params);
+    const user = await this.userModel.findOne({ email: params.email });
+    if (user) {
+      const data = {
+        succes: true,
+        exists: true,
+        message: "Bu email band",
+      };
+      return data;
+    } else {
+      const data = {
+        succes: true,
+        exists: false,
+        message: "Bu email band emas",
+      };
+      return data;
+    }
+  }
+
+  async logOut(TOKEN) {
+    const token = this.jwtService.verifyToken(TOKEN);
+    const id = token.user_id;
+    const user = await this.userModel.updateOne(
+      { _id: id },
+      { isActive: false }
+    );
+    if (!user) {
+      throw new Error("Bunday token mavjud emas");
+    }
+    const data = {
+      succes: true,
+      message: "Siz tizimdan chiqdingiz",
+    };
+    return data;
+  }
+
+  async deleteProfile(TOKEN) {
+    const token = this.jwtService.verifyToken(TOKEN);
+    const id = token.user_id;
+    const user = await this.userModel.findOneAndDelete({ _id: id });
+    if (!user) {
+      throw new Error("Bu tokenda user topilmadi");
+    }
+    return {
+      succes: true,
+      message: "Profil o'chirildi",
+    };
+  }
 }
 export default userService;

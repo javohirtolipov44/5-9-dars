@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "7d25312f-86fd-4498-8a41-7fb69ee3ac66",
+		"name": "9-dars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14374179"
+	},
+	"item": [
+		{
+			"name": "auth_register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"javohir\",\r\n  \"email\": \"tolipovjavohir@gmail.com\",\r\n  \"password\": \"flesh181199\",\r\n  \"age\": 21\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "auth_login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"javohir\",\r\n  \"password\": \"flesh181199\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "auth_profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjdhOWJlYmUzMTVhMmYyYTE4YTZlOTQwIiwiaWF0IjoxNzM5MTc4ODQ5LCJleHAiOjE3MzkyNjUyNDl9.meZOoSSuxrG-8c5UxMwB4v0-EhvEoyjIVU9Ox5us2RA"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:4000/api/auth/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "put_auth_profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjdhOWJlYmUzMTVhMmYyYTE4YTZlOTQwIiwiaWF0IjoxNzM5MTg2NDM3LCJleHAiOjE3MzkyNzI4Mzd9.teNZEP5n7X36wnqcAuLpb0qFO26-ha-BS0IGxaBTRe0"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"javohir\",\r\n  \"age\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/auth/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "change_password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjdhOWJlYmUzMTVhMmYyYTE4YTZlOTQwIiwiaWF0IjoxNzM5MTg2NDM3LCJleHAiOjE3MzkyNzI4Mzd9.teNZEP5n7X36wnqcAuLpb0qFO26-ha-BS0IGxaBTRe0"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"oldPassword\": \"gorilla18112005\",\r\n  \"newPassword\": \"flesh181199\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/api/auth/change-password"
+			},
+			"response": []
+		},
+		{
+			"name": "check_email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:4000/api/auth/check-email/tolipovjavohir@gmail.com"
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjdhOWJlYmUzMTVhMmYyYTE4YTZlOTQwIiwiaWF0IjoxNzM5MTg2NDM3LCJleHAiOjE3MzkyNzI4Mzd9.teNZEP5n7X36wnqcAuLpb0qFO26-ha-BS0IGxaBTRe0"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:4000/api/auth/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "delete_profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjdhOWJlYmUzMTVhMmYyYTE4YTZlOTQwIiwiaWF0IjoxNzM5MTg2NDM3LCJleHAiOjE3MzkyNzI4Mzd9.teNZEP5n7X36wnqcAuLpb0qFO26-ha-BS0IGxaBTRe0"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:4000/api/auth/delete"
+			},
+			"response": []
+		}
+	]
+}

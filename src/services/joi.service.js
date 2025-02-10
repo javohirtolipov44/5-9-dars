@@ -18,6 +18,16 @@ class joiService {
 
     await schema.validateAsync(data);
   }
+
+  async validateEmail(params) {
+    const schema = this.joi.object({
+      email: this.joi
+        .string()
+        .regex(/^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/),
+    });
+
+    await schema.validateAsync(params);
+  }
 }
 
 export default joiService;
